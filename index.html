@@ -10,16 +10,33 @@
 <body>
     <div class="container">
         <h1 class="text-center mt-5">
-            Youtube Video Search Using Data API V3
+            Youtube twbsPagination
         </h1>
-        <form>
+        <br>
+        <form autocomplete="off" id="myForm">
             <div class="form-group">
-                <input type="text" class="form-control" name="" id="search">
+                <input type="text" name="" id="search" placeholder="Topic" required class ="form-control" >
             </div>
             <div class="form-group">
-                <input type="submit" onclick="display()" class="btn btn-danger" value="Search Videos">
+                <input type="submit" id='btn'  class="btn btn-danger" value="Search Videos">
             </div>
         </form>
+        <table style="display: none;" id="table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Thumbnail</th>
+                    <th>Visit Channel</th>
+                </tr>
+                <tbody id="results">
+
+                </tbody>
+            </thead>
+
+        </table>
+        <div id="pager">
+            <ul id="pagination" class="pagination-sm"></ul>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div id="videos">
@@ -34,43 +51,8 @@
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    function display(){
-        alert("submitted")
-    }
-    $(document).ready(function(){
-        var video=''
-        var videos =$("#videos")
-    let apiKey = 'AIzaSyA4rjcxiH8X16_blfZ1QK88Z1_97cyPYHg'
-    alert("submitted")
-    $("form").submit((e) => {
-
-        e.preventDefault()
-        let search = $("#search").val()
-        let maxResults=10
-        
-        videoSearch(apiKey,search,maxResults)
-    })
-})
-
-function videoSearch(apiKey,search,maxResults){
-    $.get("https://www.googleapis.com/youtube/v3/search?key=" + apiKey + "&playlistId&part=snippet&maxResults=10&q=" + search+"&type=video",(data) => {
-        console.log(data)
-        $("#videos").empty()
-        console.log("Making vedios empty")
-        
-        data.items.forEach(element => {
-            
-            console.log("Vedio id",element.id.videoId)
-            video   =`
-            <iframe width ='420' height='315' src="https://www.youtube.com/embed/${element.id.videoId}" frameorder="0" allowfullscreen></iframe>
-            `
-            $("#videos").append(video)
-
-        });
-    })
-    
-
-}
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+<script src="jquery.twbsPagination.min.js"></script>
+<script src="script.js"></script>
 </html>
